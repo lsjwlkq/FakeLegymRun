@@ -238,17 +238,18 @@ def get_local_save():
         save_data=f.read()
         return save_data
 
-save_json=json.loads(get_local_save())
-if save_json['userid'] :
-    choose=input(f"检测到本地保存的账户 : {save_json['name']}，是否使用？(y/n)")
-    if choose == "y":
-        name=save_json["name"]
-        userid=save_json["userid"]
-        password=save_json["password"]
-    else:
-        userid=input("请输入要账户:")
-        password=input("请输入要密码:")
-else:
+try:
+    save_json=json.loads(get_local_save())
+    if save_json['userid']:
+        choose = input(f"检测到本地保存的账户 : {save_json['name']}，是否使用？(y/n)")
+        if choose == "y":
+            name = save_json["name"]
+            userid = save_json["userid"]
+            password = save_json["password"]
+        else:
+            userid = input("请输入要账户:")
+            password = input("请输入要密码:")
+except:
     userid=input("请输入要账户:")
     password=input("请输入要密码:")
 
